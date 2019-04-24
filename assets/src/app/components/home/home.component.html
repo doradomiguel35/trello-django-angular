@@ -1,0 +1,108 @@
+<ng-template home-btn>    
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a href="" class="btn btn-primary">
+                    <i class="fa fa-home"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</ng-template>
+
+<ng-template left-nav-btn>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item main-nav-margin">
+                <form method="get" action="" class="searchBoardForm">
+                  <div class="input-group">
+                    <input type="search" class="form-control" placeholder="Search for boards" id="searchForm">
+                    <div class="input-group-btn">
+                      <button class="btn primary btn-primary" type="submit">
+                        <i class="material-icons" style="font-size:14px">search</i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+            </li>
+
+            <li class="nav-item main-nav-margin">
+                <form method="get" action="" class="invitations">
+                    <button type="submit" class="btn btn-primary" id="invite-dropdown-btn">
+                        <span class="caret"></span>
+                        <i class="material-icons" style="font-size:15px">insert_invitation</i>
+                    </button>
+                </form>
+            </li>
+
+            <li class="nav-item main-nav-margin">
+                <button class="btn primary btn-primary" data-target="#addBoard" data-toggle="modal">
+                    <i class="fa fa-plus" style="font-size:15px;color: #ffffff"></i>
+                </button>
+            </li>
+
+            <li class="nav-item main-nav-margin">
+                <a href="" class="btn primary btn-primary round-button"  data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <i class="material-icons" style="font-size:18px;color: #ffffff">person</i>
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" id='profile-dropdown'>
+                    <li>
+                        <form method="post" action="">
+                            <button type="submit" class="btn btn-primary"> Logout</button>
+                        </form> 
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
+    </div>   
+</ng-template>
+<div class="wrapper">
+    <section class="columns">
+        <div class="column">
+            <h1 class="feed-text-right">BOARDS</h1>
+            <div class="parent">
+                <div class="column-board">
+                    <a href="#" class="btn btn-outline-secondary feed-button-left" style="height: 100px;padding: 40px;padding-left: 60px;">
+                        <i class="material-icons" style="font-size:14px">dashboard</i> [BOARD TITLE]
+                    </a>
+                </div>
+                <div class="column-board">
+                    <a (click)="open(content)" mdbWavesEffect class="btn btn-outline-secondary feed-button-left" style="height: 100px;padding: 20px;padding-left: 60px;">
+                        <i class="material-icons" style="font-size:20px;margin-left:30px;">add</i><h1 class="login-forms" style="font-size:15px;">Create a board</h1>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="column">
+            
+        </div>  
+    </section>
+
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Create a board</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="boardForm" (ngSubmit)="createBoard()">
+            <input formControlName="title" type="text" name="title" class="form-control" placeholder="Board title"><br>
+            <textarea formControlName="description" class="form-control" rows="3" cols="3" name="description" placeholder="Description(Optional)"></textarea><br>
+            <select formControlName="visibility" name="visibility" class="form-control" style="width: 100px;">
+              <option value="Public">Public</option>
+              <option value="Private">Private</option>
+            </select><br> 
+            <button type="submit" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        {{ boardForm.value|json }}
+        
+      </div>
+    </ng-template>
+
+</div>
