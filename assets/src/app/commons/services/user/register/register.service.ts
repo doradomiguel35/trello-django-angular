@@ -13,7 +13,7 @@ export class RegisterService {
   	return this.http.post<any>(url+'users/register/', user).toPromise()
   	.then(
   		response => {
-  			this.setToken(response);
+  			this.setToken(response.token);
   			return response;
   		}
   	)

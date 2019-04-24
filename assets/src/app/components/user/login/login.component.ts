@@ -42,7 +42,7 @@ export class LoginComponent{
     this.login.loginService(this.loginForm.value)
     .then(
       response => {
-         this.route.navigate(['/home/']);
+         this.route.navigate([`/home/${response.id}/`]);
       }
     ) 
     .catch(

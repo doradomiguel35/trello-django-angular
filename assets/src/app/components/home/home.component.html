@@ -63,11 +63,13 @@
         <div class="column">
             <h1 class="feed-text-right">BOARDS</h1>
             <div class="parent">
+                <ng-container *ngFor=" let board of boards ">
                 <div class="column-board">
-                    <a href="#" class="btn btn-outline-secondary feed-button-left" style="height: 100px;padding: 40px;padding-left: 60px;">
-                        <i class="material-icons" style="font-size:14px">dashboard</i> [BOARD TITLE]
+                    <a routerLink="/board/{{board.id}}/" class="btn btn-outline-secondary feed-button-left" style="height: 100px;padding: 40px;padding-left: 60px;">
+                        <i class="material-icons" style="font-size:14px">dashboard</i> {{ board.title }}
                     </a>
                 </div>
+                </ng-container>
                 <div class="column-board">
                     <a (click)="open(content)" mdbWavesEffect class="btn btn-outline-secondary feed-button-left" style="height: 100px;padding: 20px;padding-left: 60px;">
                         <i class="material-icons" style="font-size:20px;margin-left:30px;">add</i><h1 class="login-forms" style="font-size:15px;">Create a board</h1>

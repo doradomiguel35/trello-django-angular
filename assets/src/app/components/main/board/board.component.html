@@ -1,0 +1,79 @@
+<body style="background-color: #0079bf">
+	<div class="board-nav">
+		<h1 class="board-nav-title" style="margin-right: 10px;"> {{ board_details.title }} | </h1>
+		<h1 class="board-nav-title">{{ board_details.visibility }} </h1>
+		<form  class="members-modal-view" style="display: inline; margin-left: 20px;">
+			<button  type="submit" class="btn btn-success">Members</button>
+		</form>
+		<!--  PERMISSIONS FOR OWNER OR MEMBER OF A BOARD--> 
+		<form method="post" action="" style="display: inline; margin-left: 20px;">
+			<button type="submit" class="btn btn-danger">Close Board</button>
+		</form>
+		<!-- -->
+		<!-- <form method="post" action="" style="display: inline;">
+			<button type="submit" class="btn btn-danger">Leave Board</button>
+		</form> -->
+		<!--  -->
+		<form method="get" action="{% url 'main:archived_items' board.id %}" style="display: inline;" class="show-menu-btn" data-target="#boardModal" data-toggle="modal">
+			<button class="show-menu btn" type="button"> ...Show Menu </button>
+		</form>
+	</div>
+
+	<ng-template #content let-modal>
+	      <div class="modal-header">
+	        <h4 class="modal-title" id="modal-create-list">Create a board</h4>
+	        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <form [formGroup]="boardForm" (ngSubmit)="createBoard()">
+	            <input formControlName="title" type="text" name="title" class="form-control" placeholder="Board title"><br>
+	            <textarea formControlName="description" class="form-control" rows="3" cols="3" name="description" placeholder="Description(Optional)"></textarea><br>
+	            <select formControlName="visibility" name="visibility" class="form-control" style="width: 100px;">
+	              <option value="Public">Public</option>
+	              <option value="Private">Private</option>
+	            </select><br> 
+	            <button type="submit" class="btn btn-outline-dark">Save</button>
+	        </form>
+	      </div>
+	      <div class="modal-footer">
+
+	      </div>
+	    </ng-template>
+	
+	<section class="lists-container">
+		<ng-container *ngFor="let list of lists">
+	    	<div class="list">
+	    		<h3 class="list-title">
+	    			{{ list.name }}
+	    			<div class="dropdown show" style="display: inline-block;text-align: center;">
+	    			  <a class="edit-list-btn btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	    			  </a>
+	    				<div class="dropdown-menu list-dropdown" aria-labelledby="dropdownMenuLink">
+	    					<form class="btn-archive-list">
+	    				    	<button class="dropdown-item" type="submit">Archive</button>
+	    				    </form>
+	    				    <a class="dropdown-item" href="#">Edit</a>
+	    			  	</div>
+	    			</div>
+	    		</h3>
+	    		
+	    		<ul class="list-items">
+	    				<li draggable="true" ondragstart="drag(event)" class="modal-li-draggable"> 
+	    					<form method="get"  class="ticket-modal" data-toggle="modal" data-target="#ticketModal">
+	    					<!-- TICKET NAME -->
+	    					<button type="submit" hidden="hidden">trigger</button>
+	    					</form>
+	    				</li>
+	    		</ul>
+	    		<button id="btn-add-card" class="add-card-btn btn">Add a card</button>
+	    	</div>
+    	</ng-container>
+
+		<button (click)="open(content)" id="btn-add-list" class="add-list-btn btn" type="submit" style="margin-left: 15px;">Add a list</button>
+
+	</section>
+
+	
+</body>

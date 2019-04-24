@@ -14,21 +14,34 @@ export class HomeService {
       this.headers = new HttpHeaders();
       this.headers.append('Authorization', `Token ${localStorage.getItem('USER_TOKEN')}`);
 
-      board['token'] = JSON.parse(localStorage.getItem('USER_TOKEN')).token;
+      board['token'] = JSON.parse(localStorage.getItem('USER_TOKEN'));
       console.log(board);
-      return this.http.post<any>(url+'board/create/', board, {headers: this.headers}).toPromise()
+      return this.http.post<any>(`${url}board/create/`, board, {headers: this.headers}).toPromise()
       .then(
           response => {
-              console.log(response);
               return response;
           }
       )
       .catch(
           error => {
-              console.log(error);
               return Promise.reject(error);
           }
       )
+  }
+
+  getBoardsService(id){
+    return this.http.get(`${url}board/view/${id}/`).toPromise()
+    .then(
+        response => {
+            console.log(response);
+            return response;
+        }
+    )
+    .catch(
+        error => {
+            return Promise.reject(error);
+        }
+    )
   }
 
 }

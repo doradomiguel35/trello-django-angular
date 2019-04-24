@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Board
+from .models import Board, List, Ticket
 
 
 class BoardAdmin(admin.ModelAdmin):
@@ -14,4 +14,32 @@ class BoardAdmin(admin.ModelAdmin):
 			'description',
 		)
 
+
+class ListAdmin(admin.ModelAdmin):
+	"""
+	list admin
+	"""
+	class Meta:
+		model = List
+		list_display = (
+			'id',
+			'name',
+			'archived'
+		)
+
+
+class TicketAdmin(admin.ModelAdmin):
+	"""
+	ticket admin
+	"""
+	class Meta:
+		model = Ticket
+		list_display = (
+			'id',
+			'name',
+			'description',
+			'archived',
+		)
+admin.site.register(Ticket, TicketAdmin)
+admin.site.register(List, ListAdmin)
 admin.site.register(Board, BoardAdmin)

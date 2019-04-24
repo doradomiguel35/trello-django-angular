@@ -59,7 +59,7 @@ export class RegisterComponent implements OnInit {
     this.register.registerService(this.registrationForm.value)
     .then(
       response => {
-          this.route.navigate(['/home/']);
+          this.route.navigate([`/home/${response.id}/`]);
       }
     )
     .catch(

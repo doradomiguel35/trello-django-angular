@@ -12,11 +12,13 @@ import { RegisterComponent } from './components/user/register/register.component
 import { HomeComponent } from './components/home/home.component';
 
 import { TokenService } from './commons/services/interceptor/token.service';
+import { BoardComponent } from './components/main/board/board.component';
 
 const routes: Routes = [
   { path: '', component:LoginComponent },
   { path: 'register', component:RegisterComponent },
-  { path: 'home', component:HomeComponent}
+  { path: 'home/:id', component:HomeComponent},
+  { path: 'board/:boardId', component:BoardComponent }
 ]
 
 @NgModule({
@@ -24,7 +26,8 @@ const routes: Routes = [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    BoardComponent
   ],
   imports: [
     HttpClientModule,

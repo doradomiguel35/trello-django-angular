@@ -13,11 +13,11 @@ export class LoginService {
   	// Service for authenticating user credentials in the backend, once authentication
   	// is successful, a token will be returned, store it in the local storage to give 
   	// the logged in user access to some pages.
-    console.log(user);
+    
   	return this.http.post<any>(url+'users/login/', user).toPromise()
   	.then(
   		response => {
-  			this.setToken(response);
+  			this.setToken(response.token);
   			return response;
   		}
   	)
@@ -34,7 +34,7 @@ export class LoginService {
   }
 
   getToken(){ // Get token from local storage
-    return JSON.parse(localStorage.getItem('USER_TOKEN')).token;
+    return JSON.parse(localStorage.getItem('USER_TOKEN')) ;
   }
 
 }

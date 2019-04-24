@@ -2,6 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import permissions
 from rest_framework.authtoken.models import Token
+from rest_framework.authentication import TokenAuthentication
 
 from django.contrib.auth import authenticate
 from .serializers import LoginSerializer, RegisterSerializer
@@ -14,6 +15,7 @@ class LoginView(APIView):
     """
     serializer_class = LoginSerializer
     permission_classes = (permissions.AllowAny,)
+    # authentication_classes = (TokenAuthentication,) 
 
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(
@@ -23,6 +25,7 @@ class LoginView(APIView):
         token, _ = Token.objects.get_or_create(user=serializer.user)
 
         return Response({
+            'id' : token.user.id,
             'token': token.key
             },
             headers = {
@@ -38,6 +41,7 @@ class RegisterView(APIView):
     """
     serializer_class = RegisterSerializer
     permission_classes = (permissions.AllowAny,)
+    # authentication_classes = (TokenAuthentication,) 
 
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(
@@ -59,6 +63,7 @@ class RegisterView(APIView):
         token, _ = Token.objects.get_or_create(user=user)
 
         return Response({
+            'id' : token.user.id,
             'token': token.key
             }, 
             headers = {
