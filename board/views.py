@@ -1,6 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import permissions
+from rest_framework.authentication import TokenAuthentication
 
 from .models import Board
 from rest_framework.authtoken.models import Token
@@ -11,9 +12,9 @@ class BoardView(APIView):
 	"""
 	Board view
 	"""
-	# permission_classes = (permissions.IsAuthenticated,)
-
-	permission_classes = (permissions.AllowAny,)
+	permission_classes = (permissions.IsAuthenticated,)
+	authentication_classes = (TokenAuthentication,) 
+	# permission_classes = (permissions.AllowAny,)
 
 	def post(self, request, *args, **kwargs):
 		serializer = BoardCreationSerializer(

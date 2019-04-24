@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
     private route: Router) { }
 
   ngOnInit() {
+
   	this.titlePage.setTitle('Home | Trello')
 
     this.boardForm = this.fb.group({
@@ -63,7 +64,6 @@ export class HomeComponent implements OnInit {
        }
     )
   }
-
 
   open(content) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {

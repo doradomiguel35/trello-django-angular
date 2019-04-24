@@ -49,8 +49,11 @@ class RegisterView(APIView):
             email=request.data['email'],
             first_name=request.data['first_name'],
             last_name=request.data['last_name'],
-            password=request.data['password'])
+            password=request.data['password'],
+            is_active=True)
 
+        user.save()
+        user.set_password(request.data['password'])
         user.save()
         
         token, _ = Token.objects.get_or_create(user=user)

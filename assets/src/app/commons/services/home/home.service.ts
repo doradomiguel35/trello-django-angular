@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { url } from '../../constants/global';
 
 @Injectable({
@@ -7,11 +7,16 @@ import { url } from '../../constants/global';
 })
 
 export class HomeService {
-
+   headers;
   constructor(private http: HttpClient) { }
 
   createBoardService(board){
-      return this.http.post<any>(url+'board/create/', board).toPromise()
+      this.headers = new HttpHeaders();
+      this.headers.append('Authorization', `Token ${localStorage.getItem('USER_TOKEN')}`);
+
+      board['token'] = JSON.parse(localStorage.getItem('USER_TOKEN')).token;
+      console.log(board);
+      return this.http.post<any>(url+'board/create/', board, {headers: this.headers}).toPromise()
       .then(
           response => {
               console.log(response);

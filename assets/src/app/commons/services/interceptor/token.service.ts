@@ -12,12 +12,13 @@ export class TokenService implements HttpInterceptor{
 
   constructor(private injector: Injector) { }
 
-  intercept(req: HttpRequest<any>,next: HttpHandler): Observable <HttpEvent<any>>{
+  intercept(req: HttpRequest<any>,next: HttpHandler): Observable <HttpEvent<any>>{		
   	let tokenService = this.injector.get(LoginService);
   	this.token = tokenService.getToken();
+  	
   	let request = req.clone({
   		setHeaders:{
-  		  	Authorization: 'Token '+this.token
+  		  	Authorization: `Token ${this.token}`
   		}
   	});
   	return next.handle(request);
